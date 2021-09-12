@@ -106,7 +106,7 @@ When user wants to change any settings<br>
 Then the app will show an error
 
 <h3>FEATURE 5: DATA VISUALIZATION</h3>
-</em>
+<em>
 As a user, I should be able to see a chart about upcoming events so that I can have a quick overview of events in my city.
 </em>
 <h4>Scenario 1: Show a chart with the number of upcoming events in each city.</h4>
