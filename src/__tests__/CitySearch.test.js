@@ -12,6 +12,7 @@ describe('<CitySearch /> component', () => {
     CitySearchWrapper = shallow(<CitySearch locations={locations} />);
   });
 
+  // FEATURE 1 - Scenario 2
   test('render text input', () => {
     expect(CitySearchWrapper.find('.city')).toHaveLength(1);
   });
@@ -55,5 +56,8 @@ describe('<CitySearch /> component', () => {
     });
     expect(CitySearchWrapper.state("suggestions")).toEqual(filteredLocations);
   });
+
+    // FEATURE 1 - Scenario 3
+
 
 });
