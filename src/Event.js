@@ -4,7 +4,6 @@ class Event extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //event: {},
       showDetails: false,
     };
     this.toggleDetails = this.toggleDetails.bind(this);
