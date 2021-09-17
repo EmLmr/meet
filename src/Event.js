@@ -16,14 +16,14 @@ class Event extends Component {
   render() {
     let event = this.props.event;
     return (
-      <div className="event-container">
+      <div className="event event-container">
         <h2 className="event-title">{event.summary}</h2>
         <p>{event.status}</p>
         <div className="basic-info">
-          <h3 className="event-location">{event.location}</h3>
-          <h3 className="event-scheduled-start">
+          <p className="event-location">{event.location}</p>
+          <p className="event-scheduled-start">
             From: {event.start.dateTime} ({event.start.timeZone})
-          </h3>
+          </p>
           {this.state.showDetails === true 
           && (
              <h3 className="event-scheduled-end">
