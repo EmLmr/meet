@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+
+import { Container, Row, Badge, Button} from 'react-bootstrap';
 
 class Event extends Component {
   constructor(props) {
@@ -16,27 +18,37 @@ class Event extends Component {
   render() {
     let event = this.props.event;
     return (
-      <div className="event event-container">
+      <Container className="event event-container">
+        <Row>
         <h2 className="event-title">{event.summary}</h2>
-        <p>{event.status}</p>
-        <div className="basic-info">
-          <p className="event-location">{event.location}</p>
-          <p className="event-scheduled-start">
+        </Row>
+        <Row>
+        <Badge className="event-status">{event.status}</Badge>
+        </Row>
+        <Row className="basic-info">
+        <h5 className="event-location">{event.location}</h5>
+          <h5 className="event-scheduled-start">
             From: {event.start.dateTime} ({event.start.timeZone})
-          </p>
+          </h5>
           {this.state.showDetails === true 
           && (
-             <h3 className="event-scheduled-end">
-             From: {event.end.dateTime} ({event.end.timeZone})
-             </h3>) 
+             <h5 className="event-scheduled-end">
+             Ends: {event.end.dateTime} ({event.end.timeZone})
+             </h5>) 
           && (
             <p className="event-details">{event.description}</p>
           )}
-        </div>
-        <button className="details-btn" onClick={this.toggleDetails}>
+        </Row>
+        <Row>
+        <Button bsPrefix="custom-btn" className="details-btn" onClick={this.toggleDetails}>
           {!this.state.showDetails ? 'Show details' : 'Close'}
-        </button>
-      </div>
+        </Button>
+        </Row>
+        
+       
+        
+        
+      </Container>
     );
   }
 }

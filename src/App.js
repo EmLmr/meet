@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
+
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 
+import './App.css';
+import logo from './img/logo.png';
 import './nprogress.css'; 
 
 class App extends Component {
@@ -50,6 +52,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <img
+          src={logo}
+          className="logo d-inline-block align-top"
+          alt="The DevUps logo"
+        />
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
         <EventList events={this.state.events} />
