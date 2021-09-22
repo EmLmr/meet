@@ -83,12 +83,12 @@ Then the event’s details are hidden again (back to default state)
 As a user, I should be able to change the number of events to display so that I can see as many/few events as I want.
 </em>
 <h4>Scenario 1: When user hasn’t specified a number, 32 is the default number.</h4>
-Given search results have just been displayed<br>
-When user defines no specific number of events<br>
-Then 32 events are displayed by default
+Given user has opened the app<br>
+When the list of events is loaded<br>
+Then there will be 32 events displayed by default
 
 <h4>Scenario 2: User can change the number of events they want to see.</h4>
-Given a user wants to display a different number of events<br>
+Given user wants to display a different number of events<br>
 When user inputs a different number in field “Number of events:”<br>
 Then the said number of events will be displayed
 
