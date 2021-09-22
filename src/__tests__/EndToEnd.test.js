@@ -8,6 +8,7 @@ describe('show/hide an event details', () => {
   beforeAll(async () => {
     jest.setTimeout(30000);
     browser = await puppeteer.launch({
+      // // Headless mode for real-time test in Chromium:
       // headless: false,
       // slowMo: 250,
       // ignoreDefaultArgs: ['--disable-extensions']
