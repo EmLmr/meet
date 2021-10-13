@@ -27,8 +27,8 @@ ul {
     list-style: none;
 }
 
-p {
-    margin: 5px 0;
+label {
+    margin-top: 5px 0;
     color: white;
     font-family: 'Montserrat', sans-serif;
 }

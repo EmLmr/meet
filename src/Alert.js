@@ -26,6 +26,13 @@ class InfoAlert extends Alert {
         super(props);
         this.color = 'yellow';
     }
+    getStyle = () => {
+        return {
+            color: this.color,
+            fontWeight: 'bold',
+            fontFamily: 'Montserrat',
+        };
+    };
 }
 
 class ErrorAlert extends Alert {
@@ -33,6 +40,14 @@ class ErrorAlert extends Alert {
         super(props);
         this.color = 'red';
     }
+    getStyle = () => {
+        return {
+            color: this.color,
+            fontWeight: 'bold',
+            fontSize: '18px',
+            fontFamily: 'Montserrat',
+        };
+    };
 }
 
 export { InfoAlert, ErrorAlert };
