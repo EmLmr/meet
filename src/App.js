@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Nav, Container } from 'react-bootstrap';
+
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
@@ -53,14 +55,16 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <div className="nav-logo">
-                    <img src={logo} className="logo d-inline-block align-top" alt="The DevUps logo" />
-                </div>
+            <Container className="App">
+                <Nav className="navbar justify-content-center" bg="black">
+                    <Nav.Link href="#home">
+                        <img src={logo} className="nav-logo" alt="The DevUps logo" />
+                    </Nav.Link>
+                </Nav>
                 <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
                 <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
                 <EventList events={this.state.events} />
-            </div>
+            </Container>
         );
     }
 }
