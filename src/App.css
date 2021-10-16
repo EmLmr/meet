@@ -36,6 +36,11 @@ label {
 .display-none {
     display: none;
 }
+
+.Alert {
+    padding: 3px 0;
+}
+
 .showSuggestions {
     display: block;
 }
@@ -68,10 +73,10 @@ input[type='number'] {
 .suggestions {
     width: 250px;
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     align-self: center;
     margin: 0;
-    top: 43px;
+    top: 85px;
     font-size: 14px;
     box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
 }
@@ -153,11 +158,6 @@ input[type='number'] {
     grid-gap: 20px;
     padding: 20px;
     font-family: sans-serif;
-}
-
-.Alert {
-    position: fixed;
-    top: 20px;
 }
 
 .data-vis-wrapper {

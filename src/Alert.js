@@ -4,11 +4,17 @@ class Alert extends Component {
     constructor(props) {
         super(props);
         this.color = null;
+        this.height = null;
+        this.fontFamily = 'Montserrat';
+        this.fontSize = null;
     }
 
     getStyle = () => {
         return {
             color: this.color,
+            height: this.height,
+            fontFamily: this.fontFamily,
+            fontSize: this.fontSize,
         };
     };
 
@@ -25,29 +31,18 @@ class InfoAlert extends Alert {
     constructor(props) {
         super(props);
         this.color = 'yellow';
+        this.height = '40px';
+        this.fontSize = '15px';
     }
-    getStyle = () => {
-        return {
-            color: this.color,
-            fontWeight: 'bold',
-            fontFamily: 'Montserrat',
-        };
-    };
 }
 
 class ErrorAlert extends Alert {
     constructor(props) {
         super(props);
         this.color = 'red';
+        this.height = '20px';
+        this.fontSize = '15px';
     }
-    getStyle = () => {
-        return {
-            color: this.color,
-            fontWeight: 'bold',
-            fontSize: '18px',
-            fontFamily: 'Montserrat',
-        };
-    };
 }
 
 export { InfoAlert, ErrorAlert };
