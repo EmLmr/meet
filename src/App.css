@@ -201,11 +201,11 @@ input[type='number'] {
     align-items: center;
     justify-content: center;
     width: 100%;
-    transform: translateX(-10%);
     height: 100%;
-    padding: 5%;
     top: 0;
+    left: 0;
     background-image: url('img/welcome-screen.jpg');
+    background-size: cover;
 }
 
 .WelcomeScreen a {
