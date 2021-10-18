@@ -5,8 +5,9 @@ import { Nav, Container } from 'react-bootstrap';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { getEvents, extractLocations } from './api';
+import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import { WarningAlert } from './Alert';
+import WelcomeScreen from './WelcomeScreen';
 
 import logo from './img/logo.png';
 import './App.css';
@@ -18,18 +19,23 @@ class App extends Component {
         locations: [],
         currentLocation: 'all',
         numberOfEvents: 32,
+        showWelcomeScreen: undefined,
     };
 
-    componentDidMount() {
+    async componentDidMount() {
         this.mounted = true;
-        getEvents().then((events) => {
-            if (this.mounted) {
-                this.setState({
-                    events: events.slice(0, this.state.numberOfEvents),
-                    locations: extractLocations(events),
-                });
-            }
-        });
+        const accessToken = localStorage.getItem('access_token');
+        const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+        const searchParams = new URLSearchParams(window.location.search);
+        const code = searchParams.get('code');
+        this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+        if ((code || isTokenValid) && this.mounted) {
+            getEvents().then((events) => {
+                if (this.mounted) {
+                    this.setState({ events, locations: extractLocations(events) });
+                }
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -55,6 +61,8 @@ class App extends Component {
     };
 
     render() {
+        if (this.state.showWelcomeScreen === undefined) return <div className="App" />;
+
         return (
             <Container className="App">
                 <Nav className="navbar justify-content-center" bg="black">
@@ -71,6 +79,12 @@ class App extends Component {
                 <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
                 <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
                 <EventList events={this.state.events} />
+                <WelcomeScreen
+                    showWelcomeScreen={this.state.showWelcomeScreen}
+                    getAccessToken={() => {
+                        getAccessToken();
+                    }}
+                />
             </Container>
         );
     }

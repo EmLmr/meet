@@ -192,43 +192,82 @@ input[type='number'] {
     margin: 1rem;
 }
 
-.google-btn {
-    width: 184px;
-    height: 42px;
-    margin: 1rem;
-    background-color: #4285f4;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+/* WELCOME SCREEN */
+.WelcomeScreen {
+    color: white;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    transform: translateX(-10%);
+    height: 100%;
+    padding: 5%;
+    top: 0;
+    background-image: url('img/welcome-screen.jpg');
 }
+
+.WelcomeScreen a {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.WelcomeScreen h1 {
+    font-size: 3em;
+}
+
+.WelcomeScreen h2 {
+    font-weight: bold;
+}
+
+.google-btn {
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    margin: 1rem;
+    background-color: #2ee0eb;
+}
+
 .google-btn:hover {
     box-shadow: 0 0 6px #4285f4;
 }
+
 .google-btn:active {
     background: #1669f2;
 }
+
 .google-icon-wrapper {
     position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
-    border-radius: 2px;
     background-color: #fff;
 }
+
 .google-icon {
-    position: absolute;
-    margin-top: 11px;
-    margin-left: -8px;
-    width: 18px;
-    height: 18px;
+    position: relative;
+    display: flex;
+    width: 30px;
+    margin: 2px;
 }
+
 .btn-text {
+    cursor: pointer;
     float: right;
-    margin: 11px 11px 0 0;
-    color: #fff;
-    font-size: 14px;
-    letter-spacing: 0.2px;
-    font-family: 'Roboto';
+    color: black;
+    font-size: 15px;
+    letter-spacing: 0.1px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #2ee0eb;
+    box-shadow: none;
+    border-style: none;
+    width: 80%;
+    height: 100%;
+    text-align: center;
+    margin: 0;
 }
 
 @media only screen and (min-width: 992px) {
