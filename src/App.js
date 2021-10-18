@@ -6,6 +6,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
+import { WarningAlert } from './Alert';
 
 import logo from './img/logo.png';
 import './App.css';
@@ -60,7 +61,13 @@ class App extends Component {
                     <Nav.Link href="#home">
                         <img src={logo} className="nav-logo" alt="The DevUps logo" />
                     </Nav.Link>
+                    {!navigator.onLine ? (
+                        <WarningAlert text="No internet connection! Please connect to the internet for an updated list of events." />
+                    ) : (
+                        <WarningAlert text="" />
+                    )}
                 </Nav>
+
                 <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
                 <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
                 <EventList events={this.state.events} />
