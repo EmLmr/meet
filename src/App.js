@@ -23,6 +23,7 @@ class App extends Component {
     };
 
     async componentDidMount() {
+        const { numberOfEvents } = this.state;
         this.mounted = true;
         const accessToken = localStorage.getItem('access_token');
         const isTokenValid = (await checkToken(accessToken)).error ? false : true;
@@ -32,7 +33,7 @@ class App extends Component {
         if ((code || isTokenValid) && this.mounted) {
             getEvents().then((events) => {
                 if (this.mounted) {
-                    this.setState({ events, locations: extractLocations(events) });
+                    this.setState({ events: events.slice(0, numberOfEvents), locations: extractLocations(events) });
                 }
             });
         }
@@ -42,23 +43,25 @@ class App extends Component {
         this.mounted = false;
     }
 
-    updateEvents = (location, eventCount) => {
-        this.mounted = true;
+    updateEvents = (location, numberOfEvents) => {
         getEvents().then((events) => {
             const locationEvents =
-                location === 'all' && eventCount === 0
-                    ? events
-                    : location !== 'all' && eventCount === 0
-                    ? events.filter((event) => event.location === location)
-                    : events.slice(0, eventCount);
-            if (this.mounted) {
-                this.setState({
-                    events: locationEvents,
-                    numberOfEvents: eventCount,
-                });
-            }
+                location === 'All Cities'
+                    ? events.slice(0, numberOfEvents)
+                    : events.filter((event) => event.location === location);
+            this.setState({
+                events: locationEvents.slice(0, numberOfEvents),
+                currentLocation: location,
+                numberOfEvents: numberOfEvents,
+            });
         });
     };
+
+    updateNumberOfEvents(eventNumber) {
+        this.setState({ numberOfEvents: eventNumber });
+        const { currentLocation } = this.state;
+        this.updateEvents(currentLocation, eventNumber);
+    }
 
     render() {
         if (this.state.showWelcomeScreen === undefined) return <div className="App" />;
@@ -76,7 +79,11 @@ class App extends Component {
                     )}
                 </Nav>
 
-                <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+                <CitySearch
+                    locations={this.state.locations}
+                    updateEvents={this.updateEvents}
+                    events={this.state.events}
+                />
                 <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
                 <EventList events={this.state.events} />
                 <WelcomeScreen
