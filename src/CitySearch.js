@@ -5,7 +5,7 @@ class CitySearch extends Component {
     state = {
         query: '',
         suggestions: [],
-        showSuggestions: undefined,
+        showSuggestions: false,
     };
 
     handleInputChanged = (event) => {
@@ -20,7 +20,7 @@ class CitySearch extends Component {
                 infoText: 'We can not find the city you are looking for. Please try another city',
             });
         } else {
-            return this.setState({
+            this.setState({
                 query: value,
                 suggestions,
                 infoText: '',
@@ -31,11 +31,10 @@ class CitySearch extends Component {
     handleItemClicked = (suggestion) => {
         this.setState({
             query: suggestion,
-            suggestions: [],
             showSuggestions: false,
             infoText: '',
         });
-        this.props.updateEvents(suggestion, 0);
+        this.props.updateEvents(suggestion);
     };
 
     render() {

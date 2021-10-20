@@ -55,23 +55,25 @@ class App extends Component {
         this.mounted = false;
     }
 
-    updateEvents = (location, eventCount) => {
-        this.mounted = true;
+    updateEvents = (location, numberOfEvents) => {
         getEvents().then((events) => {
             const locationEvents =
-                location === 'all' && eventCount === 0
-                    ? events
-                    : location !== 'all' && eventCount === 0
-                    ? events.filter((event) => event.location === location)
-                    : events.slice(0, eventCount);
-            if (this.mounted) {
-                this.setState({
-                    events: locationEvents,
-                    numberOfEvents: eventCount,
-                });
-            }
+                location === 'all'
+                    ? events.slice(0, numberOfEvents)
+                    : events.filter((event) => event.location === location);
+            this.setState({
+                events: locationEvents.slice(0, numberOfEvents),
+                currentLocation: location,
+                numberOfEvents: numberOfEvents,
+            });
         });
     };
+
+    updateNumberOfEvents(eventNumber) {
+        this.setState({ numberOfEvents: eventNumber });
+        const { currentLocation } = this.state;
+        this.updateEvents(currentLocation, eventNumber);
+    }
 
     getData = () => {
         const { locations, events } = this.state;
@@ -85,7 +87,7 @@ class App extends Component {
 
     render() {
         // if (this.state.showWelcomeScreen === undefined) return <div className="App" />;
-        const { locations, numberOfEvents, events } = this.state;
+
         return (
             <Container className="App">
                 <Nav className="navbar justify-content-center" bg="black">
@@ -99,15 +101,17 @@ class App extends Component {
                     )}
                 </Nav>
 
-                <CitySearch updateEvents={this.updateEvents} locations={locations} />
-                <NumberOfEvents updateEvents={this.updateEvents} numberOfEvents={numberOfEvents} />
+                <CitySearch
+                    updateEvents={this.updateEvents}
+                    locations={this.state.locations}
+                    events={this.state.events}
+                />
+                <NumberOfEvents updateNumberOfEvents={(e) => this.updateNumberOfEvents(e)} />
 
                 <div className="data-vis-wrapper">
-                    <EventGenre events={events} />
+                    <EventGenre events={this.state.events} />
                     <ResponsiveContainer height={400}>
                         <ScatterChart
-                            // width={800}
-                            // height={400}
                             margin={{
                                 top: 20,
                                 right: 20,
@@ -124,7 +128,7 @@ class App extends Component {
                     </ResponsiveContainer>
                 </div>
 
-                <EventList events={events} />
+                <EventList events={this.state.events} />
                 {/* <WelcomeScreen
                     showWelcomeScreen={this.state.showWelcomeScreen}
                     getAccessToken={() => {
