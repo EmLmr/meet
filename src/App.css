@@ -45,6 +45,10 @@ label {
     font-family: 'Montserrat', sans-serif;
 }
 
+tspan {
+    font-family: 'Bebas Neue', cursive;
+}
+
 .display-none {
     display: none;
 }
